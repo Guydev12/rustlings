@@ -38,13 +38,14 @@ mod my_module {
     pub fn transformer(input: Vec<(String, Command)>)->Vec<String> { 
         
 		let mut results = Vec::new();
-        for tup in input.iter()
+        for (string, command) in input
         {
-        	let (s, command) = tup;
+    
         	let result = match command {
-        		Command::Uppercase => s.to_uppercase(),
-        		Command::Trim => s.trim().to_owned(),
-        		Command::Append(x)=> {
+        		Command::Uppercase => string.to_uppercase(),
+        		Command::Trim => string.trim().to_owned(),
+        		Command::Append(x)=> string + &"bar".repeat(x),
+        		/*{
         		    let mut s = s.to_string();
         		    let mut x = *x as u32;
         		    while x  > 0{
@@ -52,7 +53,7 @@ mod my_module {
         				x -=1;
         			}
         			s
-        		},
+        		},*/
         	};
 
         	results.push(result);
